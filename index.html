@@ -9,6 +9,8 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- link to firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <!-- Link to Moment.js should go here -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="homework.js"></script>
 </head>
@@ -49,19 +51,19 @@
                         <form role="form">
                             <div class="form-group row">
                                 <label for input>Train Name</label>
-                                <input class="form-control" type="text" id="train-name">
+                                <input class="form-control" type="text" id="train-name" required>
                             </div>
                             <div class="form-group row">
                                 <label for input>Destination</label>
-                                <input class="form-control" type="text" id="train-destination">
+                                <input class="form-control" type="text" id="train-destination" required>
                             </div>  
                             <div class="form-group row">
                                 <label for input>First Train Time (HH:mm- military time)</label>
-                                <input class="form-control" type="time" id="first-traintime">
+                                <input class="form-control" type="time" id="first-traintime" required>
                             </div> 
                             <div class="form-group row">
                                 <label for input>Frequency</label>
-                                <input class="form-control" type="number" id="frequency">
+                                <input class="form-control" type="number" id="frequency" required>
                             </div> 
                             <button class="btn btn-default" id="add-train" type="submit">Submit</button>                                                                                
                         </form>

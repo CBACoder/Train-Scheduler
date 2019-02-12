@@ -49,18 +49,50 @@ $(document).ready(function(){
 
     // fire watcher base and on child add.
     databaseRef.ref().on("child_added",function(snapshot){
+
+        // calculate the schedule times
+        var tFrequency = snapshot.val().frequency;
+        console.log("fre is: ",tFrequency);
+        var firstTime =snapshot.val().firstTrainTime; 
+        console.log("first time train is: ",firstTime);
+        // First time train starts
+        var firstTimeTrainStart = moment(firstTime, "HH:mm");
+        // Current Time
+        var currentTime = moment();
+        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+        //difference between times
+        var diffTime = moment().diff(moment(firstTimeTrainStart),"minutes");
+        console.log("DIFFERENCE IN TIME: " + diffTime);
+
+        //time apart (remainder )
+        var tRemainder = diffTime % tFrequency;
+        console.log(tRemainder);
+
+        // minutes till next train
+        var tMinutesTillTrain = tFrequency- tRemainder;
+        console.log("minutes till next train ",tMinutesTillTrain);  
+
+        //next train arrival time
+        var nextTrain = moment().add(tMinutesTillTrain,"minutes");
+        console.log("next train arrives at : ",moment(nextTrain).format("hh:mm"));
+
         // populate the dom with train schedules
         
         $("#trainSchedules").append(
           "<tr>"  +
             "<td>" + snapshot.val().trainName    + "</td>" +
             "<td>"  + snapshot.val().destination   + "</td>"  +
-            "<td>"  + snapshot.val().frequency     + "</td>"  +
-            "<td>"  + snapshot.val().frequency + "</td>"  + 
+            "<td>"  + snapshot.val().frequency   + "</td>"  +
+            "<td>"  + moment(nextTrain).format("hh:mm")     + "</td>"  +
+            "<td>"  + tMinutesTillTrain + "</td>"  + 
           "</tr>"
         )
 
     });
+
+    // Moments calculations
+    // Assumptions
 
 
 });
